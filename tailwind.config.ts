@@ -11,6 +11,10 @@ const config: Config = {
       fontFamily: {
         arial: ['Arial', 'sans-serif'],
       },
+      colors: {
+        primario: '#1F2128',
+        secundario: '#3B3E48',
+      },
     },
   },
   plugins: [],
