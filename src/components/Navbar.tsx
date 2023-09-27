@@ -1,7 +1,8 @@
 /* eslint-disable react/jsx-pascal-case */
 /* eslint-disable react/no-array-index-key */
+'use client'
 import Link from 'next/link'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
 import Swipeable_Drawer from './Swipeable_Drawer'
 
@@ -13,8 +14,31 @@ const navItems = [
 ]
 
 function Navbar() {
+  const [isScrolled, setIsScrolled] = useState(false)
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 0) {
+        setIsScrolled(true)
+      } else {
+        setIsScrolled(false)
+      }
+    }
+
+    window.addEventListener('scroll', handleScroll)
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+    }
+  }, [])
+
   return (
-    <nav className="sticky top-0 z-50 flex w-full justify-between bg-red-600 text-white backdrop-blur-md md:fixed md:bg-transparent md:backdrop-blur-none">
+    // <nav className="sticky top-0 z-50 flex w-full justify-between bg-red-600 text-white md:fixed md:bg-transparent">
+    <nav
+      className={`sticky top-0 z-50 flex w-full justify-between bg-red-600 text-white transition-all duration-300 md:fixed md:bg-transparent ${
+        isScrolled ? 'md:bg-red-600 md:shadow-lg' : null
+      }`}
+    >
       <div className="p-2 md:flex-1">
         <Link href="/">
           <span className="logo-solaz text-4xl">SOLAZ</span>
