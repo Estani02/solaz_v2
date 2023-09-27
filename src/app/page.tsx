@@ -38,7 +38,7 @@ export default function Home() {
             href="#video"
           >
             <OndemandVideoIcon />
-            Conocenos
+            &nbsp;Conocenos
           </Link>
         </div>
       </div>

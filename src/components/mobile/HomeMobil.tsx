@@ -24,22 +24,13 @@ function HomeMobil() {
           </p>
         </div>
         <SocialMedia />
-        <div className="flex w-full gap-2 text-center text-xs font-semibold">
-          <Link
-            className="flex w-full flex-1 items-center justify-center rounded-lg bg-gradient-to-b from-red-600 via-[#472424] to-gray-800 py-2 uppercase"
-            href="#video"
-          >
-            <OndemandVideoIcon />
-            Conocenos
-          </Link>
-          {/* <Link
-            className="flex w-full flex-1 items-center justify-center gap-1 rounded-lg py-2 uppercase"
-            href="#video"
-          >
-            <OndemandVideoIcon />
-            Ver vídeo
-          </Link> */}
-        </div>
+        <Link
+          className="flex items-center justify-center rounded-lg bg-gradient-to-b from-red-600 via-[#472424] to-gray-800 px-6 py-2 uppercase"
+          href="#video"
+        >
+          <OndemandVideoIcon />
+          &nbsp;Conocenos
+        </Link>
       </div>
     </div>
   )
