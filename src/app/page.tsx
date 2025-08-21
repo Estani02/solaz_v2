@@ -73,12 +73,12 @@ export default function Home() {
               <span className="font-bold">DISFRUTA LA LIBERTAD DE ENTRENAR EN SOLAZ</span>
             </p>
             <iframe
-              allowFullScreen
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              className="container h-[300px] md:h-auto md:w-full md:flex-1"
-              frameBorder="0"
-              src="https://www.youtube.com/embed/NGbLFb80bqs"
-              title="YouTube video player"
+              allow="autoplay"
+              className="container h-[300px] md:h-[450px] md:w-full md:flex-1"
+              height="480"
+              src="https://www.youtube.com/embed/G3PvTkYi1WI?si=QVWoPXzJ3N_tqbo7"
+              title="Conoce Solaz Club"
+              width="640"
             />
           </div>
         </div>
