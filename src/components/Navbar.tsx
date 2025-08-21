@@ -36,7 +36,7 @@ function Navbar() {
     // <nav className="sticky top-0 z-50 flex w-full justify-between bg-red-600 text-white md:fixed md:bg-transparent">
     <nav
       className={`sticky top-0 z-50 flex w-full justify-between bg-red-600 text-white transition-all duration-300 md:fixed md:bg-transparent ${
-        isScrolled ? 'md:bg-red-600 md:shadow-lg' : null
+        isScrolled ? 'md:bg-red-600 md:shadow-lg md:backdrop-blur' : null
       }`}
     >
       <div className="p-2 md:flex-1">

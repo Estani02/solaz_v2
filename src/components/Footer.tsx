@@ -26,7 +26,7 @@ export const IteamFooter = [
 
 function Footer() {
   return (
-    <footer className="relative flex h-full w-full flex-col justify-between gap-4 bg-secundario p-5 py-10 text-white md:flex-row md:px-[3rem] xl:px-[6rem]">
+    <footer className="relative flex h-full w-full flex-col justify-between gap-4 bg-secundario px-4 py-10 text-white md:flex-row md:px-[3rem] xl:px-[6rem]">
       <div className="flex w-full flex-col items-center border-b border-solid border-white md:w-fit md:border-none">
         <span className="logo-solaz mb-2 text-3xl font-black lg:text-4xl">SOLAZ</span>
         <div className="flex w-full justify-center md:hidden">
