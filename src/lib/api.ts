@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-import type { FormValues } from '@/interfaces'
+import type { FormValues, SorteoFormValues } from '@/interfaces'
 
 export async function sendFormContact(formData: FormValues) {
   await fetch('/api/contact', {
@@ -24,4 +24,16 @@ export async function sendFormContact(formData: FormValues) {
       console.error('❌Error:', error) // Manejar errores en caso de que ocurran
       throw error
     })
+}
+
+export async function sendFormSorteo(formData: SorteoFormValues) {
+  const response = await fetch('/api/sorteo', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(formData),
+  })
+
+  if (!response.ok) {
+    throw new Error('Network response was not ok')
+  }
 }

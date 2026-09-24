@@ -24,3 +24,12 @@ export interface FormErrors {
   email?: string
   message?: string
 }
+
+export interface SorteoFormValues {
+  name: string
+  email: string
+  phone: string
+  contactTime: string
+}
+
+export type SorteoFormErrors = Partial<Record<keyof SorteoFormValues, string>>

@@ -1,6 +1,7 @@
 /* eslint-disable react/jsx-pascal-case */
 /* eslint-disable react/no-array-index-key */
 'use client'
+import Image from 'next/image'
 import Link from 'next/link'
 import React, { useEffect, useState } from 'react'
 
@@ -40,8 +41,15 @@ function Navbar() {
       }`}
     >
       <div className="p-2 md:flex-1">
-        <Link href="/">
-          <span className="logo-solaz text-4xl">SOLAZ</span>
+        <Link aria-label="Solaz Club - Inicio" className="flex h-full items-center" href="/">
+          <Image
+            priority
+            alt="Solaz Club"
+            className="h-10 w-auto"
+            height={235}
+            src="/images/logos/solaz-club-logo-blanco.svg"
+            width={585}
+          />
         </Link>
       </div>
       <div className="flex flex-wrap items-center justify-end p-2 md:w-[45%] xl:justify-center">
