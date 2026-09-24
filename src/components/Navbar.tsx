@@ -147,10 +147,10 @@ export default function Navbar() {
             initial={{ clipPath: 'circle(0% at 100% 0%)' }}
             transition={{ duration: 0.6, ease: EASE_OUT }}
           >
-            <div
-              aria-hidden
-              className="pointer-events-none absolute -right-32 -top-32 h-96 w-96 rounded-full bg-solaz/30 blur-[120px]"
-            />
+            {/* El glow se recorta en su propio contenedor: si desborda el panel, genera scroll horizontal */}
+            <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden">
+              <div className="absolute -right-32 -top-32 h-96 w-96 rounded-full bg-solaz/30 blur-[120px]" />
+            </div>
             <ul className="relative flex flex-col gap-2">
               {NAV_ITEMS.map((item, i) => (
                 <motion.li
