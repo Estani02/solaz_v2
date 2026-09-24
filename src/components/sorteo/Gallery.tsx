@@ -3,7 +3,8 @@ import Image from 'next/image'
 import { motion, useInView } from 'framer-motion'
 import { useRef } from 'react'
 
-import { EASE_OUT, Eyebrow, Reveal } from './motion'
+import { EASE_OUT, Eyebrow, Reveal } from '@/components/ui/motion'
+
 import { TULUM_PHOTOS, TULUM_SHORT_ID } from './data'
 
 const TILES = [

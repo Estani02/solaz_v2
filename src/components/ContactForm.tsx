@@ -1,135 +1,157 @@
 'use client'
 import type { FormErrors, FormValues } from '@/interfaces'
 
-import { Button, TextField } from '@mui/material'
+import { AnimatePresence, motion } from 'framer-motion'
 import { Formik } from 'formik'
-import React, { useState } from 'react'
-import swal from 'sweetalert'
+import { useState } from 'react'
 
 import Spinner from '@/assets/svg/Spinner'
 import { sendFormContact } from '@/lib/api'
+import FormField from '@/components/ui/FormField'
+import { EASE_OUT } from '@/components/ui/motion'
 
-function ContactForm() {
-  const [isLoading, setIsLoading] = useState(false)
+const INITIAL_VALUES: FormValues = { name: '', email: '', phone: '', message: '' }
 
-  return (
-    <Formik
-      initialValues={{
-        name: '',
-        email: '',
-        phone: '',
-        message: '',
-      }}
-      validate={(value: FormValues) => {
-        const errors: FormErrors = {}
-        const phoneRegExpression = /^[1-9][0-9]{2}[1-9][0-9]{6}$/
-        const emailRegExpression = /^[^@]+@[^@]+\.[a-zA-Z]{2,}$/
+const validate = (values: FormValues) => {
+  const errors: FormErrors = {}
+  const digits = values.phone.replace(/\D/g, '')
 
-        if (!value.name) {
-          errors.name = 'Rellene con nombre y apellido*'
-        } else if (!/^[a-zA-Z]+/.test(value.name)) {
-          errors.name = 'El nombre no es válido. Porfavor ingrese otro'
-        }
+  if (values.name.trim().length < 2) errors.name = 'Ingresá tu nombre y apellido'
+  if (!/^[^@\s]+@[^@\s]+\.[a-zA-Z]{2,}$/.test(values.email)) errors.email = 'Ingresá un mail válido'
+  if (digits.length < 10 || digits.length > 13)
+    errors.phone = 'Ingresá tu teléfono con característica'
+  if (!values.message.trim()) errors.message = 'Contanos en qué te podemos ayudar'
+  else if (values.message.length > 1500) errors.message = 'El mensaje es demasiado largo'
 
-        if (!value.phone) {
-          errors.phone = 'Rellene con su teléfono *'
-        } else if (!phoneRegExpression.test(value.phone)) {
-          errors.phone = 'El número es invalido *'
-        }
-
-        if (!value.email) {
-          errors.email = 'Rellene con su email *'
-        } else if (!emailRegExpression.test(value.email)) {
-          errors.email = 'El email es invalido *'
-        }
-
-        if (!value.message) {
-          errors.message = 'Rellena con tu mensaje *'
-        } else if (value.message.length > 1500) {
-          errors.message = 'El mensaje es demasiado largo *'
-        }
-
-        return errors
-      }}
-      onSubmit={async (value, { resetForm }) => {
-        try {
-          setIsLoading(true)
-          await sendFormContact(value)
-          void swal('Se enviaron tus datos!', 'Nos estaremos comunicando pronto', 'success')
-          resetForm()
-        } catch (error) {
-          void swal('Error!', 'Vuelve a intentarlo', 'error')
-        } finally {
-          setIsLoading(false) // Ocultar mensaje de carga, tanto si la solicitud tiene éxito como si falla.
-        }
-      }}
-    >
-      {({ values, errors, touched, handleChange, handleSubmit, handleBlur }) => (
-        <form className="flex w-full flex-col gap-3 text-white" onSubmit={handleSubmit}>
-          <TextField
-            error={errors.name && touched.name ? true : false}
-            helperText={errors.name && touched.name ? errors.name : undefined}
-            id={errors.name && touched.name ? 'outlined-error-helper-text' : 'outlined-basic'}
-            label="Nombre y Apellido"
-            name="name"
-            value={values.name}
-            variant="outlined"
-            onBlur={handleBlur}
-            onChange={handleChange}
-          />
-          <TextField
-            error={errors.email && touched.email ? true : false}
-            helperText={errors.email && touched.email ? errors.email : undefined}
-            id={errors.email && touched.email ? 'outlined-error-helper-text' : 'outlined-basic'}
-            label="Email"
-            name="email"
-            value={values.email}
-            variant="outlined"
-            onBlur={handleBlur}
-            onChange={handleChange}
-          />
-          <TextField
-            error={errors.phone && touched.phone ? true : false}
-            helperText={errors.phone && touched.phone ? errors.phone : undefined}
-            id={errors.phone && touched.phone ? 'outlined-error-helper-text' : 'outlined-basic'}
-            label="Teléfono"
-            name="phone"
-            type="number"
-            value={values.phone}
-            variant="outlined"
-            onBlur={handleBlur}
-            onChange={handleChange}
-          />
-          <TextField
-            fullWidth
-            multiline
-            error={errors.message && touched.message ? true : false}
-            helperText={errors.message && touched.message ? errors.message : undefined}
-            id={
-              errors.name && touched.message
-                ? 'filled-textarea-error-helper-text'
-                : 'filled-textarea'
-            }
-            label="Tu mensaje"
-            name="message"
-            rows={4}
-            value={values.message}
-            onBlur={handleBlur}
-            onChange={handleChange}
-          />
-          <Button
-            className="bg-[#1976d2]"
-            disabled={!values.email || !values.message || !values.name || !values.phone}
-            type="submit"
-            variant="contained"
-            onClick={void handleSubmit}
-          >
-            {isLoading ? <Spinner className="h-[24.5px] w-[24.5px]" /> : 'Envar'}
-          </Button>
-        </form>
-      )}
-    </Formik>
-  )
+  return errors
 }
 
-export default ContactForm
+export default function ContactForm() {
+  const [status, setStatus] = useState<'idle' | 'sent' | 'error'>('idle')
+
+  return (
+    <AnimatePresence mode="wait">
+      {status === 'sent' ? (
+        <motion.div
+          key="sent"
+          animate={{ opacity: 1, scale: 1 }}
+          className="flex min-h-[30rem] flex-col items-center justify-center gap-6 text-center"
+          initial={{ opacity: 0, scale: 0.9 }}
+          transition={{ duration: 0.6, ease: EASE_OUT }}
+        >
+          <motion.span
+            animate={{ scale: 1, rotate: 0 }}
+            className="flex h-24 w-24 items-center justify-center rounded-full bg-solaz text-5xl"
+            initial={{ scale: 0, rotate: -90 }}
+            transition={{ type: 'spring', stiffness: 200, damping: 12, delay: 0.2 }}
+          >
+            ✓
+          </motion.span>
+          <h3 className="font-display text-3xl font-extrabold">¡Recibimos tu consulta!</h3>
+          <p className="max-w-xs text-white/60">Nos vamos a comunicar con vos muy pronto.</p>
+          <button
+            className="text-sm font-semibold uppercase tracking-widest text-solaz underline-offset-4 hover:underline"
+            type="button"
+            onClick={() => {
+              setStatus('idle')
+            }}
+          >
+            Enviar otra consulta
+          </button>
+        </motion.div>
+      ) : (
+        <motion.div key="form" exit={{ opacity: 0, y: -20 }}>
+          <Formik
+            initialValues={INITIAL_VALUES}
+            validate={validate}
+            onSubmit={async (values, { resetForm }) => {
+              try {
+                await sendFormContact(values)
+                resetForm()
+                setStatus('sent')
+              } catch (error) {
+                setStatus('error')
+              }
+            }}
+          >
+            {({
+              values,
+              errors,
+              touched,
+              isSubmitting,
+              handleChange,
+              handleBlur,
+              handleSubmit,
+            }) => (
+              <form noValidate className="flex flex-col gap-5" onSubmit={handleSubmit}>
+                <FormField
+                  autoComplete="name"
+                  error={touched.name ? errors.name : undefined}
+                  label="Nombre y apellido"
+                  name="name"
+                  value={values.name}
+                  onBlur={handleBlur}
+                  onChange={handleChange}
+                />
+                <div className="grid gap-5 sm:grid-cols-2">
+                  <FormField
+                    autoComplete="email"
+                    error={touched.email ? errors.email : undefined}
+                    inputMode="email"
+                    label="Email"
+                    name="email"
+                    type="email"
+                    value={values.email}
+                    onBlur={handleBlur}
+                    onChange={handleChange}
+                  />
+                  <FormField
+                    autoComplete="tel"
+                    error={touched.phone ? errors.phone : undefined}
+                    inputMode="tel"
+                    label="Teléfono"
+                    name="phone"
+                    type="tel"
+                    value={values.phone}
+                    onBlur={handleBlur}
+                    onChange={handleChange}
+                  />
+                </div>
+                <FormField
+                  multiline
+                  error={touched.message ? errors.message : undefined}
+                  label="Tu mensaje"
+                  name="message"
+                  value={values.message}
+                  onBlur={handleBlur}
+                  onChange={handleChange}
+                />
+                <motion.button
+                  className="mt-2 flex items-center justify-center gap-3 rounded-full bg-solaz px-8 py-5 text-sm font-bold uppercase tracking-wider text-white shadow-[0_20px_50px_-15px_rgba(225,40,38,0.9)] disabled:opacity-60"
+                  disabled={isSubmitting}
+                  type="submit"
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                >
+                  {isSubmitting ? <Spinner className="h-6 w-6" /> : 'Enviar consulta'}
+                </motion.button>
+                <AnimatePresence>
+                  {status === 'error' ? (
+                    <motion.p
+                      animate={{ opacity: 1 }}
+                      className="text-center text-sm text-solaz"
+                      exit={{ opacity: 0 }}
+                      initial={{ opacity: 0 }}
+                    >
+                      No pudimos enviar tu consulta. Probá de nuevo o escribinos por WhatsApp.
+                    </motion.p>
+                  ) : null}
+                </AnimatePresence>
+              </form>
+            )}
+          </Formik>
+        </motion.div>
+      )}
+    </AnimatePresence>
+  )
+}

@@ -11,6 +11,7 @@ const config: Config = {
       colors: {
         primario: '#1F2128',
         secundario: '#3B3E48',
+        ink: '#0B0C0F',
         // Paleta landing sorteo Tulum
         ocean: '#031A20',
         lagoon: '#2EB5C0',
@@ -22,6 +23,11 @@ const config: Config = {
         arial: ['Arial', 'sans-serif'],
         display: ['var(--font-display)', 'sans-serif'],
         serif: ['var(--font-serif)', 'serif'],
+      },
+      // Tailwind 3.3 no trae 15/85: sin esto, clases como border-white/15 no se generan
+      opacity: {
+        15: '0.15',
+        85: '0.85',
       },
       keyframes: {
         marquee: {

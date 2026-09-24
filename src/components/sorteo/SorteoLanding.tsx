@@ -1,12 +1,13 @@
 'use client'
 import { MotionConfig, motion, useScroll, useSpring } from 'framer-motion'
 
+import ScrollStatement from '@/components/ui/ScrollStatement'
+
 import Hero from './Hero'
 import Marquee from './Marquee'
 import HowToParticipate from './HowToParticipate'
 import Prize from './Prize'
 import Gallery from './Gallery'
-import ScrollStatement from './ScrollStatement'
 import Pricing from './Pricing'
 import DrawCountdown from './DrawCountdown'
 import SorteoForm from './SorteoForm'
@@ -28,7 +29,10 @@ export default function SorteoLanding() {
         <HowToParticipate />
         <Prize />
         <Gallery />
-        <ScrollStatement />
+        <ScrollStatement
+          className="text-sand"
+          text="No esperes más y no te pierdas este espectacular viaje."
+        />
         <Pricing />
         <DrawCountdown />
         <SorteoForm />

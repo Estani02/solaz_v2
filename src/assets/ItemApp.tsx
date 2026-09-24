@@ -5,27 +5,27 @@ import QrIcon from '@/assets/svg/QrIcono'
 
 export const ItemApp = [
   {
-    icon: <MancuernaIcono />,
-    title: 'Planes de entrenamiento personalizado',
+    icon: <MancuernaIcono className="h-8 w-8" />,
+    title: 'Planes de entrenamiento personalizados',
     description:
-      'Descripción de cada ejercicio, series ,repeticiones , pausa y video explicativo con los equipos de solaz',
+      'Cada ejercicio con su descripción, series, repeticiones, pausas y un video explicativo con los equipos de Solaz.',
   },
   {
-    icon: <GraficoIcon />,
-    title: 'Seguimineto de tu progreso',
+    icon: <GraficoIcon className="h-8 w-8" />,
+    title: 'Seguimiento de tu progreso',
     description:
-      'La app registra peso, agua, sueño, entrenamiento y actividad física, generando gráficos para un seguimiento preciso',
+      'Registrá peso, agua, sueño, entrenamiento y actividad física, y seguí tu evolución con gráficos precisos.',
   },
   {
-    icon: <NutrIcon />,
-    title: 'Planes de alimentación personalizado',
+    icon: <NutrIcon className="h-8 w-8" />,
+    title: 'Planes de alimentación personalizados',
     description:
-      'Nuestro licenciado en nutrición diseñará un plan de acuerdo a tus objetivos, el cual podrás visualizar acompañado de deliciosas recetas',
+      'Nuestro licenciado en nutrición diseña un plan según tus objetivos, acompañado de recetas deliciosas.',
   },
   {
-    icon: <QrIcon />,
+    icon: <QrIcon className="h-8 w-8" />,
     title: 'Accedé fácil y rápido',
     description:
-      'Esta app propia está diseñada para que el usuaria tenga una experiencia amigable y auto gestionable',
+      'Una app propia, pensada para que tengas una experiencia simple y autogestionable desde tu celular.',
   },
 ]

@@ -1,7 +1,8 @@
 'use client'
 import { motion } from 'framer-motion'
 
-import { EASE_OUT, Eyebrow, Reveal } from './motion'
+import { EASE_OUT, Eyebrow, Reveal } from '@/components/ui/motion'
+
 import { Countdown, useCountdown } from './countdown'
 import { DOUBLE_CHANCE_DEADLINE } from './data'
 

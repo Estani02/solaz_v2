@@ -9,7 +9,7 @@ import ShuttleIcon from '@mui/icons-material/AirportShuttle'
 import HotelIcon from '@mui/icons-material/Hotel'
 import BreakfastIcon from '@mui/icons-material/FreeBreakfast'
 
-import { EASE_OUT, Eyebrow, Reveal } from './motion'
+import { EASE_OUT, Eyebrow, Reveal } from '@/components/ui/motion'
 
 const INCLUDED = [
   {
@@ -199,7 +199,7 @@ export default function Prize() {
                 viewport={{ once: true, margin: '-60px' }}
                 whileInView={{ opacity: 1, y: 0 }}
               >
-                <span className="bg-lagoon/15 flex h-11 w-11 items-center justify-center rounded-2xl text-lagoon">
+                <span className="flex h-11 w-11 items-center justify-center rounded-2xl bg-lagoon/15 text-lagoon">
                   <Icon fontSize="small" />
                 </span>
                 <h3 className="font-display text-lg font-bold text-sand">{title}</h3>

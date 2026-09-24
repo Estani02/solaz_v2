@@ -3,7 +3,8 @@ import Image from 'next/image'
 import { motion, useScroll, useTransform } from 'framer-motion'
 import { useRef } from 'react'
 
-import { EASE_OUT } from './motion'
+import { EASE_OUT } from '@/components/ui/motion'
+
 import { TULUM_PHOTOS } from './data'
 
 const HEADLINE = [
@@ -43,7 +44,7 @@ export default function Hero() {
       <div className="absolute inset-0 -z-10 bg-gradient-to-r from-ocean/80 via-ocean/30 to-transparent" />
 
       <motion.div
-        className="mx-auto flex w-full max-w-7xl flex-col justify-between gap-12 px-5 py-10 md:px-10 md:pt-28"
+        className="mx-auto flex w-full max-w-7xl flex-col justify-between gap-12 px-5 pb-10 pt-24 md:px-10 md:pt-32"
         style={{ y: contentY, opacity: contentOpacity }}
       >
         <motion.div
@@ -144,7 +145,7 @@ export default function Hero() {
             </span>
             Scroll
           </div>
-          <dl className="divide-white/15 border-white/15 ml-auto grid grid-cols-3 divide-x rounded-2xl border bg-white/10 text-white backdrop-blur-xl">
+          <dl className="ml-auto grid grid-cols-3 divide-x divide-white/15 rounded-2xl border border-white/15 bg-white/10 text-white backdrop-blur-xl">
             {[
               ['Destino', 'Tulum'],
               ['Viajan', '2 personas'],

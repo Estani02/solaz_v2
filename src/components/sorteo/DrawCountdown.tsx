@@ -1,5 +1,6 @@
 'use client'
-import { Eyebrow, Reveal } from './motion'
+import { Eyebrow, Reveal } from '@/components/ui/motion'
+
 import { Countdown, useCountdown } from './countdown'
 import { SORTEO_DATE } from './data'
 

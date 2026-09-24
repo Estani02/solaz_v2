@@ -1,95 +1,117 @@
-/* eslint-disable react/no-array-index-key */
-import React from 'react'
-import QueryBuilderIcon from '@mui/icons-material/QueryBuilder'
-import LocationOnIcon from '@mui/icons-material/LocationOn'
-import LocalPhoneIcon from '@mui/icons-material/LocalPhone'
-import EmailIcon from '@mui/icons-material/Email'
+import Image from 'next/image'
+import Link from 'next/link'
 
-import SocialMedia from './SocialMedia'
+import { HOURS, NAV_ITEMS, SITE, SORTEO_NAV } from '@/config/site'
+import ButtonLink from '@/components/ui/ButtonLink'
+import SocialLinks from '@/components/ui/SocialLinks'
 
-export const IteamFooter = [
-  {
-    icon: <LocationOnIcon className="h-7" />,
-    text: 'Av. Malvinas 812, Mendiolaza - Córdoba',
-  },
-  {
-    icon: <LocalPhoneIcon className="h-7" />,
-    text: '+5493512012426',
-    type: 'phone',
-  },
-  {
-    icon: <EmailIcon className="h-7" />,
-    text: 'csolazm@gmail.com',
-    type: 'email',
-  },
-]
-
-function Footer() {
+function Column({ title, children }: { title: string; children: React.ReactNode }) {
   return (
-    <footer className="relative flex h-full w-full flex-col justify-between gap-4 bg-secundario px-4 py-10 text-white md:flex-row md:px-[3rem] xl:px-[6rem]">
-      <div className="flex w-full flex-col items-center border-b border-solid border-white md:w-fit md:border-none">
-        <span className="logo-solaz mb-2 text-3xl font-black lg:text-4xl">SOLAZ</span>
-        <div className="flex w-full justify-center md:hidden">
-          <SocialMedia exclude={1} minimized="footer" />
+    <div className="flex flex-col gap-4">
+      <h3 className="text-xs font-semibold uppercase tracking-[0.3em] text-white/40">{title}</h3>
+      {children}
+    </div>
+  )
+}
+
+export default function Footer() {
+  return (
+    <footer className="relative overflow-hidden border-t border-white/10 bg-ink text-white">
+      <div
+        aria-hidden
+        className="pointer-events-none absolute -bottom-40 left-1/2 h-[30rem] w-[60rem] -translate-x-1/2 rounded-full bg-solaz/20 blur-[160px]"
+      />
+
+      <div className="relative mx-auto max-w-7xl px-5 pb-10 pt-20 md:px-10 md:pt-28">
+        <div className="flex flex-col items-start justify-between gap-10 border-b border-white/10 pb-16 lg:flex-row lg:items-end">
+          <h2 className="max-w-3xl font-display text-[clamp(2.75rem,7vw,6rem)] font-extrabold leading-[0.9] tracking-tight">
+            Tu mejor versión{' '}
+            <span className="font-serif font-normal italic text-solaz">empieza hoy.</span>
+          </h2>
+          <div className="flex flex-wrap gap-3">
+            <ButtonLink arrow external href={SITE.whatsapp}>
+              Escribinos
+            </ButtonLink>
+            <ButtonLink href="/contacto" variant="ghost">
+              Contacto
+            </ButtonLink>
+          </div>
         </div>
-        <p className="hidden text-justify md:block md:w-48 md:text-sm lg:w-96 lg:text-center">
-          Somos un gimnasio con espíritu de club, donde lo social y el entrenamiento placentero
-          sobresale
-        </p>
-      </div>
-      <div className="m-auto flex w-fit flex-col gap-6 md:m-0 md:flex-row">
-        <div className="flex flex-col gap-2 text-xs md:text-sm">
-          <h6 className="font-arial text-sm font-bold md:text-base lg:text-lg">CONTACTO</h6>
-          <ol className="flex flex-col gap-2">
-            {IteamFooter.map((iteam, index) => (
-              <li key={index} className="flex items-center gap-2 font-semibold">
-                {iteam.icon}
-                {iteam.type ? (
-                  <a
-                    href={
-                      iteam.type === 'email' ? 'mailto:csolazm@gmail.com' : 'tel:+5493512012426'
-                    }
-                  >
-                    {iteam.text}
-                  </a>
-                ) : (
-                  <p>{iteam.text}</p>
-                )}
+
+        <div className="grid gap-12 py-16 sm:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr_1fr]">
+          <div className="flex flex-col gap-6">
+            <Image
+              alt="Solaz Club"
+              className="h-12 w-auto self-start"
+              height={235}
+              src="/images/logos/solaz-club-logo-blanco.svg"
+              width={585}
+            />
+            <p className="max-w-xs text-sm leading-relaxed text-white/60">
+              Un gimnasio con espíritu de club, donde lo social y el entrenamiento placentero son
+              protagonistas.
+            </p>
+            <SocialLinks />
+          </div>
+
+          <Column title="Contacto">
+            <ul className="flex flex-col gap-3 text-sm text-white/80">
+              <li>
+                <a
+                  className="transition-colors hover:text-solaz"
+                  href={SITE.mapsUrl}
+                  rel="noopener noreferrer"
+                  target="_blank"
+                >
+                  {SITE.address}
+                </a>
               </li>
-            ))}
-          </ol>
+              <li>
+                <a className="transition-colors hover:text-solaz" href={`tel:${SITE.phone}`}>
+                  {SITE.phoneDisplay}
+                </a>
+              </li>
+              <li>
+                <a className="transition-colors hover:text-solaz" href={`mailto:${SITE.email}`}>
+                  {SITE.email}
+                </a>
+              </li>
+            </ul>
+          </Column>
+
+          <Column title="Horarios">
+            <dl className="flex flex-col gap-3 text-sm">
+              {HOURS.map((h) => (
+                <div key={h.days}>
+                  <dt className="text-white/60">{h.days}</dt>
+                  {h.ranges.map((r) => (
+                    <dd key={r} className="font-semibold text-white">
+                      {r}
+                    </dd>
+                  ))}
+                </div>
+              ))}
+            </dl>
+          </Column>
+
+          <Column title="Navegación">
+            <ul className="flex flex-col gap-3 text-sm text-white/80">
+              {[...NAV_ITEMS, SORTEO_NAV].map((item) => (
+                <li key={item.href}>
+                  <Link className="transition-colors hover:text-solaz" href={item.href}>
+                    {item.text}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </Column>
         </div>
-        <div className="flex flex-col gap-2 text-xs md:text-sm">
-          <h6 className="font-arial text-sm font-bold md:text-base lg:text-lg">
-            HORARIO DE ATENCIÓN
-          </h6>
-          <div className="flex gap-2">
-            <QueryBuilderIcon className="h-6" />
-            <div className="grid grid-cols-2 gap-2 text-center">
-              <div className="flex flex-col gap-4 text-left">
-                <p>Lun - Vie:</p>
-                <p>Sab - Feriados:</p>
-              </div>
-              <div className="flex flex-col gap-4 whitespace-nowrap font-bold">
-                <p>7:00 - 22:00</p>
-                <p>
-                  9:00 - 13:00
-                  <br />
-                  <span className="whitespace-nowrap">17:00 - 21:00</span>
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className="hidden w-fit flex-col gap-2 md:flex">
-          <h6 className="font-arial text-sm font-bold md:text-base lg:text-lg">REDES SOCIALES</h6>
-          <div className="hidden w-full justify-center md:flex">
-            <SocialMedia exclude={1} minimized="footer" />
-          </div>
+
+        <div className="flex flex-col items-center justify-between gap-3 border-t border-white/10 pt-8 text-xs text-white/40 md:flex-row">
+          <span>© {new Date().getFullYear()} Solaz Club. Todos los derechos reservados.</span>
+          <span>Mendiolaza, Córdoba, Argentina</span>
         </div>
       </div>
     </footer>
   )
 }
-
-export default Footer

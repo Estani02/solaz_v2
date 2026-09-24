@@ -3,7 +3,8 @@ import Image from 'next/image'
 import { animate, motion, useInView, useMotionValue, useTransform } from 'framer-motion'
 import { useEffect, useRef } from 'react'
 
-import { EASE_OUT, Eyebrow, Reveal } from './motion'
+import { EASE_OUT, Eyebrow, Reveal } from '@/components/ui/motion'
+
 import { PAYMENT_URL, PLAN_INSTALLMENTS, PLAN_PRICE, TULUM_PHOTOS, formatARS } from './data'
 
 function CountUp({ value }: { value: number }) {
@@ -53,7 +54,7 @@ export default function Pricing() {
           </Reveal>
 
           <Reveal
-            className="border-white/15 flex flex-col gap-8 rounded-[2rem] border bg-white/10 p-8 text-white backdrop-blur-2xl md:p-10"
+            className="flex flex-col gap-8 rounded-[2rem] border border-white/15 bg-white/10 p-8 text-white backdrop-blur-2xl md:p-10"
             delay={0.15}
           >
             <div className="flex flex-col gap-2">

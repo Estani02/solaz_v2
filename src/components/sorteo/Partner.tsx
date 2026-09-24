@@ -3,8 +3,8 @@ import Image from 'next/image'
 import { motion } from 'framer-motion'
 
 import InstagramIcon from '@/assets/svg/InstagramIcon'
+import { Reveal } from '@/components/ui/motion'
 
-import { Reveal } from './motion'
 import { GIRA_MUNDIAL_INSTAGRAM, PHOTO_CREDITS } from './data'
 
 export default function Partner() {

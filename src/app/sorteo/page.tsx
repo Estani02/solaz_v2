@@ -1,25 +1,9 @@
 import type { Metadata } from 'next'
 
-import { Bricolage_Grotesque, Instrument_Serif } from 'next/font/google'
-
 import SorteoLanding from '@/components/sorteo/SorteoLanding'
 
-const display = Bricolage_Grotesque({
-  subsets: ['latin'],
-  variable: '--font-display',
-  display: 'swap',
-})
-
-const serif = Instrument_Serif({
-  subsets: ['latin'],
-  weight: '400',
-  style: ['normal', 'italic'],
-  variable: '--font-serif',
-  display: 'swap',
-})
-
 export const metadata: Metadata = {
-  title: 'Sorteo Tulum | SOLAZ CLUB',
+  title: 'Sorteo Tulum',
   description:
     'Con la compra o renovación de tu plan semestral en Solaz participás del sorteo de un viaje a las playas de Tulum para 2 personas, de la mano de Gira Mundial.',
   openGraph: {
@@ -32,9 +16,5 @@ export const metadata: Metadata = {
 }
 
 export default function SorteoPage() {
-  return (
-    <div className={`${display.variable} ${serif.variable}`}>
-      <SorteoLanding />
-    </div>
-  )
+  return <SorteoLanding />
 }

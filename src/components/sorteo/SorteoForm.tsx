@@ -1,6 +1,5 @@
 'use client'
 import type { SorteoFormErrors, SorteoFormValues } from '@/interfaces'
-import type { ChangeEvent, FocusEvent } from 'react'
 
 import { AnimatePresence, motion } from 'framer-motion'
 import { Formik } from 'formik'
@@ -8,8 +7,8 @@ import { useState } from 'react'
 
 import Spinner from '@/assets/svg/Spinner'
 import { sendFormSorteo } from '@/lib/api'
-
-import { EASE_OUT, Eyebrow, Reveal } from './motion'
+import FormField from '@/components/ui/FormField'
+import { EASE_OUT, Eyebrow, Reveal } from '@/components/ui/motion'
 
 const CONTACT_TIMES = ['Mañana', 'Mediodía', 'Tarde', 'Noche']
 
@@ -26,50 +25,6 @@ const validate = (values: SorteoFormValues) => {
   if (!values.contactTime) errors.contactTime = 'Elegí un horario'
 
   return errors
-}
-
-interface FieldProps {
-  name: keyof SorteoFormValues
-  label: string
-  type?: string
-  inputMode?: 'email' | 'tel' | 'text'
-  autoComplete: string
-  value: string
-  error?: string
-  onChange: (e: ChangeEvent<HTMLInputElement>) => void
-  onBlur: (e: FocusEvent<HTMLInputElement>) => void
-}
-
-function Field({ name, label, type = 'text', error, ...props }: FieldProps) {
-  return (
-    <label className="group relative block">
-      <input
-        className={`peer w-full rounded-2xl border bg-white/[0.04] px-5 pb-3 pt-7 text-lg text-sand outline-none transition-colors duration-300 placeholder:text-transparent focus:bg-white/[0.07] ${
-          error ? 'border-solaz' : 'border-white/15 focus:border-lagoon'
-        }`}
-        id={name}
-        name={name}
-        placeholder={label}
-        type={type}
-        {...props}
-      />
-      <span className="pointer-events-none absolute left-5 top-2 text-xs font-semibold uppercase tracking-[0.2em] text-white/50 transition-all duration-300 peer-placeholder-shown:top-5 peer-placeholder-shown:text-base peer-placeholder-shown:normal-case peer-placeholder-shown:tracking-normal peer-focus:top-2 peer-focus:text-xs peer-focus:uppercase peer-focus:tracking-[0.2em] peer-focus:text-lagoon">
-        {label}
-      </span>
-      <AnimatePresence>
-        {error ? (
-          <motion.span
-            animate={{ opacity: 1, height: 'auto' }}
-            className="block overflow-hidden pl-2 pt-1 text-sm text-solaz"
-            exit={{ opacity: 0, height: 0 }}
-            initial={{ opacity: 0, height: 0 }}
-          >
-            {error}
-          </motion.span>
-        ) : null}
-      </AnimatePresence>
-    </label>
-  )
 }
 
 export default function SorteoForm() {
@@ -153,7 +108,8 @@ export default function SorteoForm() {
                     setFieldValue,
                   }) => (
                     <form noValidate className="flex flex-col gap-5" onSubmit={handleSubmit}>
-                      <Field
+                      <FormField
+                        accent="lagoon"
                         autoComplete="name"
                         error={touched.name ? errors.name : undefined}
                         label="Nombre"
@@ -162,7 +118,8 @@ export default function SorteoForm() {
                         onBlur={handleBlur}
                         onChange={handleChange}
                       />
-                      <Field
+                      <FormField
+                        accent="lagoon"
                         autoComplete="email"
                         error={touched.email ? errors.email : undefined}
                         inputMode="email"
@@ -173,7 +130,8 @@ export default function SorteoForm() {
                         onBlur={handleBlur}
                         onChange={handleChange}
                       />
-                      <Field
+                      <FormField
+                        accent="lagoon"
                         autoComplete="tel"
                         error={touched.phone ? errors.phone : undefined}
                         inputMode="tel"
