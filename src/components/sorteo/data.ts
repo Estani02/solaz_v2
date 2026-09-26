@@ -5,23 +5,15 @@ export const SORTEO_DATE = new Date('2026-11-13T19:00:00-03:00')
 
 export const DOUBLE_CHANCE_DEADLINE = new Date('2026-10-23T23:59:59-03:00')
 
-export const PLAN_PRICE = 627000
-
-export const PLAN_INSTALLMENTS = 3
-
-// TODO: completar con el link de pago real. Mientras esté vacío, el botón lleva al formulario.
-export const PAYMENT_URL = '' as string
+export const PLAN_HOURS = [
+  { days: 'Lunes a viernes', ranges: ['06:00 – 22:00'] },
+  { days: 'Sábados', ranges: ['09:00 – 13:00', '17:00 – 21:00'] },
+  { days: 'Feriados', ranges: ['08:00 – 21:00'] },
+]
 
 export const GIRA_MUNDIAL_INSTAGRAM = 'https://www.instagram.com/giramundialturismo/'
 
 export const TULUM_SHORT_ID = 'IjBschkhEqI'
-
-export const formatARS = (value: number) =>
-  new Intl.NumberFormat('es-AR', {
-    style: 'currency',
-    currency: 'ARS',
-    maximumFractionDigits: 0,
-  }).format(value)
 
 export const TULUM_PHOTOS = {
   hero: {

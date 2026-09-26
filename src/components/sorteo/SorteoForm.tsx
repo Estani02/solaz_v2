@@ -87,10 +87,11 @@ export default function SorteoForm() {
                 <Formik
                   initialValues={INITIAL_VALUES}
                   validate={validate}
-                  onSubmit={async (values, { resetForm }) => {
+                  onSubmit={async (values) => {
                     try {
                       await sendFormSorteo(values)
-                      resetForm()
+                      // Sin resetForm: el form se desmonta y vuelve limpio. Resetearlo desmonta el
+                      // pill con layoutId en plena salida y AnimatePresence nunca termina el exit.
                       setStatus('sent')
                     } catch (error) {
                       setStatus('error')

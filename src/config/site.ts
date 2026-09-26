@@ -2,7 +2,7 @@
 
 export const SITE = {
   name: 'Solaz Club',
-  url: 'https://solaz-club.vercel.app',
+  url: 'https://www.solaz.com.ar',
   address: 'Av. Malvinas 812, Mendiolaza, Córdoba',
   coords: [-31.269694381049128, -64.30207046192292] as [number, number],
   mapsUrl:

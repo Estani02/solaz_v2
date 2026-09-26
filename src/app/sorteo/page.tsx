@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 
+import { SITE } from '@/config/site'
 import SorteoLanding from '@/components/sorteo/SorteoLanding'
 
 export const metadata: Metadata = {
@@ -10,7 +11,11 @@ export const metadata: Metadata = {
     title: 'Solaz te lleva al Caribe mexicano',
     description:
       'Viaje a Tulum para 2 personas: aéreos, traslado y 7 noches en hotel 4★ frente al mar. Sorteo el 13 de noviembre.',
-    images: [{ url: 'https://solaz-club.vercel.app/images/tulum/tulum-playa-ruinas-hero.webp' }],
+    // La imagen sale de opengraph-image.jpg (convención de Next): JPEG y no WebP,
+    // porque WhatsApp no arma la tarjeta con WebP y cae al favicon.
+    url: '/sorteo',
+    siteName: SITE.name,
+    locale: 'es_AR',
     type: 'website',
   },
 }

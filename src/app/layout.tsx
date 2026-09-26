@@ -5,6 +5,7 @@ import { Bricolage_Grotesque, Inter, Instrument_Serif } from 'next/font/google'
 
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
+import { SITE } from '@/config/site'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -25,7 +26,7 @@ const serif = Instrument_Serif({
 })
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://solaz-club.vercel.app'),
+  metadataBase: new URL(SITE.url),
   title: {
     default: 'Solaz Club | Gimnasio en Mendiolaza',
     template: '%s | Solaz Club',
@@ -34,7 +35,7 @@ export const metadata: Metadata = {
     'Solaz Club es un gimnasio en Mendiolaza, Córdoba, con equipamiento Life Fitness, pase libre sin turnos, ambiente climatizado y un equipo de profesionales en educación física, nutrición y fisioterapia.',
   keywords:
     'gimnasio, acondicionamiento físico, salud, bienestar, entrenamiento, clases, comunidad, solaz',
-  authors: [{ name: 'Solaz gym', url: 'https://solaz-club.vercel.app/' }],
+  authors: [{ name: 'Solaz gym', url: SITE.url }],
   robots: 'index, follow',
   openGraph: {
     title: 'Solaz Club | Gimnasio en Mendiolaza',
@@ -45,7 +46,9 @@ export const metadata: Metadata = {
         url: 'https://wixmp-fe53c9ff592a4da924211f23.wixmp.com/users/373a94a3-8ed8-4014-8c2b-269a86e42cc1/design-previews/0988f3d9-3927-4369-bf65-c75a1a2b6c36/1691524481855-thumbnail.jpeg',
       },
     ],
-    url: 'https://solaz-club.vercel.app/',
+    url: '/',
+    siteName: SITE.name,
+    locale: 'es_AR',
     type: 'website',
   },
 }

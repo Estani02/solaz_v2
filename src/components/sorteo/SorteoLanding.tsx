@@ -8,7 +8,7 @@ import Marquee from './Marquee'
 import HowToParticipate from './HowToParticipate'
 import Prize from './Prize'
 import Gallery from './Gallery'
-import Pricing from './Pricing'
+import Plan from './Plan'
 import DrawCountdown from './DrawCountdown'
 import SorteoForm from './SorteoForm'
 import Partner from './Partner'
@@ -33,7 +33,7 @@ export default function SorteoLanding() {
           className="text-sand"
           text="No esperes más y no te pierdas este espectacular viaje."
         />
-        <Pricing />
+        <Plan />
         <DrawCountdown />
         <SorteoForm />
         <Partner />
