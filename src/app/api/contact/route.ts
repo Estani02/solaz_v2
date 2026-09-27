@@ -47,6 +47,10 @@ export async function POST(req: Request) {
 
     return NextResponse.json({ success: true })
   } catch (err) {
+    // Sin esto el 500 no dice nada: acá aparece el motivo (ej. EAUTH si Gmail rechaza la clave).
+    // eslint-disable-next-line no-console
+    console.error('[api/contact] no se pudo enviar el mail', err)
+
     return NextResponse.json({ success: false }, { status: 500 })
   }
 }
