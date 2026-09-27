@@ -7,6 +7,7 @@ import { useState } from 'react'
 
 import Spinner from '@/assets/svg/Spinner'
 import { sendFormContact } from '@/lib/api'
+import { trackEvent } from '@/lib/gtag'
 import FormField from '@/components/ui/FormField'
 import { EASE_OUT } from '@/components/ui/motion'
 
@@ -68,6 +69,7 @@ export default function ContactForm() {
               try {
                 await sendFormContact(values)
                 resetForm()
+                trackEvent('generate_lead', { form: 'contacto' })
                 setStatus('sent')
               } catch (error) {
                 setStatus('error')

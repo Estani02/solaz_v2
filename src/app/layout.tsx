@@ -5,6 +5,7 @@ import { Bricolage_Grotesque, Inter, Instrument_Serif } from 'next/font/google'
 
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
+import GoogleAnalytics from '@/components/GoogleAnalytics'
 import { SITE } from '@/config/site'
 
 const inter = Inter({ subsets: ['latin'] })
@@ -60,6 +61,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Navbar />
         {children}
         <Footer />
+        <GoogleAnalytics />
       </body>
     </html>
   )

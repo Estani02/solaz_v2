@@ -17,6 +17,8 @@ export const SITE = {
   videoUrl: 'https://www.youtube-nocookie.com/embed/G3PvTkYi1WI',
   playStore: 'https://play.google.com/store/apps/details?id=com.arceus.clubsolaz',
   appStore: 'https://apps.apple.com/app/solaz-club/id6449626352',
+  // Google Analytics 4, propiedad solaz.com.ar
+  gaId: 'G-MQ0V6LBEGP',
 }
 
 export const HOURS = [

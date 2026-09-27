@@ -7,6 +7,7 @@ import { useState } from 'react'
 
 import Spinner from '@/assets/svg/Spinner'
 import { sendFormSorteo } from '@/lib/api'
+import { trackEvent } from '@/lib/gtag'
 import FormField from '@/components/ui/FormField'
 import { EASE_OUT, Eyebrow, Reveal } from '@/components/ui/motion'
 
@@ -92,6 +93,7 @@ export default function SorteoForm() {
                       await sendFormSorteo(values)
                       // Sin resetForm: el form se desmonta y vuelve limpio. Resetearlo desmonta el
                       // pill con layoutId en plena salida y AnimatePresence nunca termina el exit.
+                      trackEvent('generate_lead', { form: 'sorteo' })
                       setStatus('sent')
                     } catch (error) {
                       setStatus('error')
